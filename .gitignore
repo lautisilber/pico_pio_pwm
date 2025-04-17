@@ -1,6 +1,5 @@
 build/
-gcc-arm-none-eabi/
-ane.tar.bz2/
+pico-sdk/
 
 .DS_Store
 
