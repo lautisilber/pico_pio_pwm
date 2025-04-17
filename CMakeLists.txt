@@ -1,45 +1,24 @@
 cmake_minimum_required(VERSION 3.13)
 
-# project(PicoPioPWM VERSION 1.0.0)
+set(PROJECT_NAME PicoPioPWM)
 
-# if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    # initialize pico-sdk from submodule
-    # note: this must happen before project()
+# Check if building standalone or being included as a subproject
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    # Standalone build
     include(pico-sdk/pico_sdk_init.cmake)
-
-    # initialize the Raspberry Pi Pico SDK
-    project(PicoPioPWM C CXX ASM)
-    # enable_language(C CXX ASM)
+    project(${PROJECT_NAME} C CXX ASM)
     pico_sdk_init()
-# endif()
+    set(PICO_PIO_PWM_BUILD_EXAMPLES ON)
+else()
+    # Used as a subproject / library
+    set(PICO_PIO_PWM_BUILD_EXAMPLES OFF)
+endif()
 
-
-# rest of your project
+# Add the actual library
 add_subdirectory(src)
 
-# if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+# Optionally add examples
+if(PICO_PIO_PWM_BUILD_EXAMPLES)
     add_subdirectory(examples)
-# endif()
-
-
-
-
-
-
-
-# cmake_minimum_required(VERSION 3.13...3.27)
-
-# set(PROJECT_NAME hello_usb)
-
-# # initialize pico-sdk from submodule
-# # note: this must happen before project()
-# include(pico-sdk/pico_sdk_init.cmake)
-
-# # initialize the Raspberry Pi Pico SDK
-# project(${PROJECT_NAME} C CXX ASM)
-# pico_sdk_init()
-
-# # rest of your project
-# add_subdirectory(src)
-# add_subdirectory(examples)
+endif()
 
