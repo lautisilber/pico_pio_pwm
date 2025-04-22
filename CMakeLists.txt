@@ -5,7 +5,7 @@ set(PROJECT_NAME PicoPioPWM)
 # Check if building standalone or being included as a subproject
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     # Standalone build
-    include(pico-sdk/pico_sdk_init.cmake)
+    include(pico_sdk_import.cmake)
     project(${PROJECT_NAME} C CXX ASM)
     pico_sdk_init()
     set(PICO_PIO_PWM_BUILD_EXAMPLES ON)
